@@ -16,6 +16,7 @@
     "fullpage.js": "^2.9.6",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.8.3",
+    "nouislider": "^11.1.0",
     "path": "^0.12.7",
     "popper.js": "^1.14.3",
     "postcss-loader": "^2.1.3",

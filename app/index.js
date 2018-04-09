@@ -4,6 +4,7 @@ import 'bootstrap';
 import 'fullpage.js';
 import 'select2';
 import 'styles/index.scss';
+import { csvJSON, getCSV } from 'utils.js';
 
 
 $(function() {
@@ -39,5 +40,12 @@ $(function() {
       stepped: true,
       density: 4
     }
+  });
+
+  // Charts
+  getCSV('/assets/datasets/barcadres2017v70_cmp.csv').then((_d) => {
+    let data = csvJSON(_d);
+    console.log(data);
+    // Do things
   });
 });

@@ -1,14 +1,17 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~fullpage.js/dist/jquery.fullpage.css";
 @import "~nouislider/distribute/nouislider.css";
+@import "~select2/dist/css/select2.css";
+@import "~@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css";
 
 $header-height: 56px;
 $primary: #B69E72;
 $dark: #3C3C3C;
 $grey: #9E9E9E;
 $light-grey: #F6F6F6;
+$dark-grey: #7D7D7D;
 
-h3, h4, p {
+html, body {
   font-family: 'Avenir Next', sans-serif;
 }
 
@@ -43,6 +46,12 @@ h4 {
   color: $dark;
   font-size: 20px;
   font-weight: 500;
+}
+
+h5 {
+  color: $dark;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .legend {
@@ -99,8 +108,51 @@ h4 {
     height: 30px;
     opacity: 0;
   }
+}
+.select2-container--bootstrap4 {
+
+  .select2-selection {
+    border: $input-border-width solid $dark-grey;
+    border-radius: 1px;
+    width: 100%;
+  }
+
+  .select2-results__option--highlighted,
+  .select2-results__option--highlighted.select2-results__option[aria-selected=true] {
+    background-color: $primary;
+  }
+
+  .select2-search--inline {
+    .select2-search__field {
+      font-size: 14px;
+      padding: 2px 8px;
+    }
+  }
+
+  &.select2-container--focus {
+    .select2-selection {
+      border-color: $primary;
+      box-shadow: none;
+    }
+
+    // when open, hide bottom border
+    &.select2-container--open .select2-selection {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .select2-selection--multiple {
+    .select2-selection__choice {
+      color: $primary;
+      border: none;
+    }
+    .select2-selection__choice__remove {
+      color: $primary;
+    }
+  }
 
 
 }
-
 

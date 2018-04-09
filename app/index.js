@@ -2,16 +2,26 @@ import $ from "jquery";
 import noUiSlider from "nouislider";
 import 'bootstrap';
 import 'fullpage.js';
+import 'select2';
 import 'styles/index.scss';
 
 
 $(function() {
   $('#fullpage').fullpage({
     anchors: ['firstPage', 'secondPage', '3rdPage'],
-    sectionsColor: ['#FAFAFA', '#fff', '#FAFAFA'],
+    sectionsColor: ['#fff', '#fff', '#fff'],
     navigation: true,
     navigationPosition: 'right',
     navigationTooltips: ['First', 'Second', 'Third']
+  });
+
+  $('select').each(function () {
+    $(this).select2({
+      theme: 'bootstrap4',
+      placeholder: $(this).attr('placeholder'),
+      allowClear: Boolean($(this).data('allow_clear')),
+      width: '100%'
+    });
   });
 
   let slider = document.getElementById('range');

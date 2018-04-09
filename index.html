@@ -39,11 +39,9 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="range-box">
+                    <h5>Période</h5>
 
-
-                        <div id="range"></div>
-                    </div>
+                    <div id="range"></div>
                 </div>
                 <div class="col-sm-8">
 
@@ -53,10 +51,45 @@
     </div>
     <div class="section">
         <div class="container">
-            <h3>Niveau de vie en France <small>Base : ensemble de l’échantillon des cadres</small></h3>
+            <h3>Niveau de vie en France
+                <small>Base : ensemble de l’échantillon des cadres</small>
+            </h3>
             <h4>
                 Pensez-vous que d’ici un an, le niveau de vie en France dans l’ensemble… ?
             </h4>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+
+                        <select class="form-control" placeholder="Sexe" name="sexe[]" multiple data-allow_clear="1">
+                            <option value="AL">Homme</option>
+                            <option value="WY">Femme</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+
+                        <select class="form-control" placeholder="Âge" name="age[]" multiple data-allow_clear="1">
+                            <option value="AL">18 - 29 ans</option>
+                            <option value="WY">29 - 30 ans</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+                        <select class="form-control" placeholder="Secteur" name="secteur[]" multiple data-allow_clear="1">
+                            <option value="AL">Privé</option>
+                            <option value="WY">Public</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

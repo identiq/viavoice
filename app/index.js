@@ -4,7 +4,7 @@ import 'bootstrap';
 import 'fullpage.js';
 import 'select2';
 import 'styles/index.scss';
-import { csvJSON, getCSV } from 'utils.js';
+import { csvJSON, getCSV, getMultipleCSV, getQuestionsData } from 'utils.js';
 
 
 $(function() {
@@ -46,6 +46,8 @@ $(function() {
   getCSV('/assets/datasets/barcadres2017v70_cmp.csv').then((_d) => {
     let data = csvJSON(_d);
     console.log(data);
+    let qdata = getQuestionsData(data.lines);
+    console.log(qdata);
     // Do things
   });
 });

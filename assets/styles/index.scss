@@ -78,6 +78,44 @@ h5 {
 
 }
 
+.sub {
+  text-align: center;
+  font-size: .8rem;
+  position: relative;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    left: .4rem;
+    right: .4rem;
+    bottom: -.4rem;
+    border-top: 1px solid $primary;
+    opacity: .3;
+  }
+
+  &:before {
+    content: "Sous-total";
+    position: absolute;
+    bottom: -1.4rem;
+    font-size: .6rem;
+    text-align: center;
+    opacity: .5;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  &.sub-p {
+    color: $primary;
+  }
+
+  &.sub-n {
+    color: $dark;
+
+    &:after {
+      border-color: $dark;
+    }
+  }
+}
 
 #range {
   height: 400px;

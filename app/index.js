@@ -3,10 +3,15 @@ import noUiSlider from "nouislider";
 import 'bootstrap';
 import 'fullpage.js';
 import 'select2';
-import 'Chart.js';
+import 'chart.js';
 import 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-annotation';
 import 'styles/index.scss';
+
+
+let timestamp = function(str) {
+  return new Date(str).getTime();
+};
 
 $(function () {
 
@@ -30,13 +35,19 @@ $(function () {
   let slider = document.getElementById('range');
 
   noUiSlider.create(slider, {
-    start: [20, 80],
+    start: [timestamp('2017'), timestamp('2018')],
     connect: true,
     orientation: 'vertical',
     range: {
-      'min': 0,
-      'max': 100
+      'min': timestamp('2016'),
+      'max': timestamp('2018')
     },
+    step: 30 * 24 * 60 * 60 * 1000,
+    /*
+    format: wNumb({
+      decimals: 0
+    }),
+    */
     pips: {
       mode: 'steps',
       stepped: true,

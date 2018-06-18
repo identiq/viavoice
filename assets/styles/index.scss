@@ -1,1 +1,198 @@
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~fullpage.js/dist/jquery.fullpage.css";
+@import "~nouislider/distribute/nouislider.css";
+@import "~select2/dist/css/select2.css";
+@import "~@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css";
+
+$header-height: 56px;
+$primary: #B69E72;
+$dark: #3C3C3C;
+$grey: #9E9E9E;
+$light-grey: #F6F6F6;
+$dark-grey: #7D7D7D;
+
+html, body {
+  font-family: 'Avenir Next', sans-serif;
+}
+
+header {
+  position: fixed;
+  background: url('/assets/images/viavoice.svg') no-repeat 50% 50% white;
+  background-size: auto 50%;
+  height: $header-height;
+  width: 100%;
+  z-index: 999;
+}
+
+.section {
+  padding-top: $header-height;
+}
+
+h3 {
+  color: $primary;
+  font-size: 24px;
+  font-weight: 600;
+
+  small {
+    color: $grey;
+    font-size: 18px;
+    margin-left: 30px;
+    font-style: italic;
+    font-weight: 500;
+  }
+}
+
+h4 {
+  color: $dark;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h5 {
+  color: $dark;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.legend {
+  font-size: 10px;
+  font-style: italic;
+  margin-bottom: 60px;
+}
+
+#fp-nav ul li {
+
+  a {
+    span {
+      background: $primary;
+    }
+
+    &.active {
+      span {
+        background: transparent;
+        border: 1px solid $primary;
+      }
+    }
+  }
+
+}
+
+.sub {
+  text-align: center;
+  font-size: .8rem;
+  position: relative;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    left: .4rem;
+    right: .4rem;
+    bottom: -.4rem;
+    border-top: 1px solid $primary;
+    opacity: .3;
+  }
+
+  &:before {
+    content: "Sous-total";
+    position: absolute;
+    bottom: -1.4rem;
+    font-size: .6rem;
+    text-align: center;
+    opacity: .5;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  &.sub-p {
+    color: $primary;
+  }
+
+  &.sub-n {
+    color: $dark;
+
+    &:after {
+      border-color: $dark;
+    }
+  }
+}
+
+#range {
+  height: 400px;
+
+  &.noUi-target {
+    background: $light-grey;
+    border-radius: 30px;
+    border: none;
+    box-shadow: none;
+    padding: 11px 0;
+  }
+
+  &.noUi-vertical {
+    width: 34px;
+  }
+
+  .noUi-connect {
+    background: $primary;
+    width: 13px;
+    left: 11px;
+    border-radius: 30px;
+  }
+
+  .noUi-handle {
+    border: none;
+    left: 2px;
+    box-shadow: none;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+  }
+}
+.select2-container--bootstrap4 {
+
+  .select2-selection {
+    border: $input-border-width solid $dark-grey;
+    border-radius: 1px;
+    width: 100%;
+  }
+
+  .select2-results__option--highlighted,
+  .select2-results__option--highlighted.select2-results__option[aria-selected=true] {
+    background-color: $primary;
+  }
+
+  .select2-search--inline {
+    .select2-search__field {
+      font-size: 14px;
+      padding: 2px 8px;
+    }
+  }
+
+  &.select2-container--focus {
+    .select2-selection {
+      border-color: $primary;
+      box-shadow: none;
+    }
+
+    // when open, hide bottom border
+    &.select2-container--open .select2-selection {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .select2-selection--multiple {
+    .select2-selection__choice {
+      color: $primary;
+      border: none;
+    }
+    .select2-selection__choice__remove {
+      color: $primary;
+    }
+  }
+
+
+}
+

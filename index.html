@@ -7,21 +7,115 @@
 
     <!-- Bootstrap CSS -->
 
-    <title>Hello, world!</title>
+    <title>Le baromètre des décideurs | Viavoice</title>
 </head>
 <body>
+
 <header>
 
 </header>
 
 <div id="fullpage">
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-</div>
+    <div class="section">
+        <div class="container">
 
-<h1>Hello, world!</h1>
+            <h3>Indice synthétique du « Moral des cadres » depuis 2004</h3>
+            <p class="legend">L’indice synthétique du « Moral des cadres » est la moyenne des indices recueillis sur
+                chacune des questions récurrentes.<br>
+                Pour chaque question, l’indice est la différence du pourcentage de réponses positives et de réponses
+                négatives. Les dates indiquées sont les dates de réalisation des interviews du « Baro Eco ».</p>
+
+            <canvas id="allChart"></canvas>
+
+
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <h3>Indice synthétique du « Moral des cadres » sur un an</h3>
+            <p class="legend">
+                L’indice synthétique du « Moral des cadres » est la moyenne des indices recueillis sur chacune des
+                questions récurrentes.
+                Pour chaque question, l’indice est la différence du pourcentage de réponses positives et de réponses
+                négatives. Les dates indiquées sont les dates de réalisation des interviews du « Baro Eco ».
+            </p>
+
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <h5>Période</h5>
+
+                    <div id="range"></div>
+                </div>
+                <div class="col-sm-10">
+                    <canvas id="periodChart"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <h3>Niveau de vie en France
+                <small>Base : ensemble de l’échantillon des cadres</small>
+            </h3>
+            <h4>
+                Pensez-vous que d’ici un an, le niveau de vie en France dans l’ensemble… ?
+            </h4>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+
+                        <select class="form-control" placeholder="Sexe" name="sexe[]" multiple data-allow_clear="1">
+                            <option value="AL">Homme</option>
+                            <option value="WY">Femme</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+
+                        <select class="form-control" placeholder="Âge" name="age[]" multiple data-allow_clear="1">
+                            <option value="AL">18 - 29 ans</option>
+                            <option value="WY">29 - 30 ans</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group clearfix">
+                        <label></label>
+                        <select class="form-control" placeholder="Secteur" name="secteur[]" multiple data-allow_clear="1">
+                            <option value="AL">Privé</option>
+                            <option value="WY">Public</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="sub sub-p">“S’améliorera” : 34%</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="sub sub-n">“Se dégradera” : 30%</p>
+                        </div>
+                    </div>
+                    <canvas id="barChart"></canvas>
+                </div>
+
+                <div class="col-sm-6">
+                    <canvas id="evolChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

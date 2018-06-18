@@ -1,3 +1,5 @@
+import 'styles/index.scss';
+
 import $ from "jquery";
 import noUiSlider from "nouislider";
 import 'bootstrap';
@@ -6,7 +8,6 @@ import 'select2';
 import 'chart.js';
 import 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-annotation';
-import 'styles/index.scss';
 
 
 let timestamp = function(str) {

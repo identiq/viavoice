@@ -188,29 +188,6 @@ $(function () {
             }
           }
         ]
-      },
-      annotation: {
-        annotations: [
-          {
-            drawTime: "afterDatasetsDraw",
-            type: "line",
-            mode: "vertical",
-            scaleID: "x-axis-0",
-            value: "February",
-            borderColor: "rgba(0, 0, 0, .3)",
-            borderWidth: 1,
-            label: {
-              fontFamily: "'Avenir Next', sans-serif",
-              fontStyle: "400",
-              backgroundColor: "rgba(255, 255, 255, 1)",
-              yAdjust: -200,
-              yPadding: 30,
-              fontColor: "#000",
-              content: "Présidentielle 2017",
-              enabled: true
-            },
-          }
-        ]
       }
     }
   });

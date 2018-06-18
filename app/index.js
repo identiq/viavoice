@@ -1,4 +1,5 @@
 import 'styles/index.scss';
+import 'images/viavoice.svg';
 
 import $ from "jquery";
 import noUiSlider from "nouislider";

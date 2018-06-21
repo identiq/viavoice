@@ -1,6 +1,5 @@
 import 'styles/index.scss';
 import 'images/viavoice.svg';
-
 import $ from "jquery";
 import noUiSlider from "nouislider";
 import 'bootstrap';
@@ -9,11 +8,8 @@ import 'select2';
 import 'chart.js';
 import 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-annotation';
+import moment from 'moment';
 
-
-let timestamp = function(str) {
-  return new Date(str).getTime();
-};
 
 $(function () {
 
@@ -37,23 +33,44 @@ $(function () {
   let slider = document.getElementById('range');
 
   noUiSlider.create(slider, {
-    start: [timestamp('2017'), timestamp('2018')],
+    start: [moment('2017').valueOf(), moment().valueOf()],
     connect: true,
     orientation: 'vertical',
     range: {
-      'min': timestamp('2016'),
-      'max': timestamp('2018')
+      'min': moment('2011-01-01').valueOf(),
+      'max': moment().valueOf()
     },
-    step: 30 * 24 * 60 * 60 * 1000,
-    /*
-    format: wNumb({
-      decimals: 0
-    }),
-    */
+    step: 95 * 24 * 60 * 60 * 1000,
+    format: {
+      to: function (value) {
+        console.log(moment(value).format('YYYY MMMM'));
+        return value;
+      },
+      from: function (value) {
+        console.log(moment(value).format('YYYY MMMM'));
+        return value;
+      }
+    },
     pips: {
       mode: 'steps',
       stepped: true,
-      density: 4
+      density: 4,
+      filter: function () {
+        return 2;
+      },
+      format: {
+        to: function (value) {
+
+          if (['1', '12'].indexOf(moment(value).format('M')) > -1) {
+            return moment(value).format('MMMM YYYY')
+          }
+
+          return moment(value).format('MMMM');
+        },
+        from: function (value) {
+          return value;
+        }
+      }
     }
   });
 
@@ -205,7 +222,7 @@ $(function () {
     }
   });
 
-  let  barCtx = document.getElementById('barChart').getContext('2d');
+  let barCtx = document.getElementById('barChart').getContext('2d');
 
   let barChart = new Chart(barCtx, {
     type: 'bar',
@@ -342,4 +359,576 @@ $(function () {
     }
   });
 
+
+  /***
+   * Question 2
+   */
+
+  let barCtx2 = document.getElementById('barChart2').getContext('2d');
+
+  let barChart2 = new Chart(barCtx2, {
+    type: 'bar',
+    data: {
+      labels: barLabels,
+      datasets: [{
+        data: [1, 10, 5, 2, 20, 30],
+        backgroundColor: barColors,
+        datalabels: {
+          align: 'top',
+          anchor: 'end',
+          color: barColors
+        }
+      }]
+    },
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+          {
+            drawTime: "afterDatasetsDraw",
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "February",
+            borderColor: "rgba(0, 0, 0, .3)",
+            borderWidth: 1,
+            label: {
+              fontFamily: "'Avenir Next', sans-serif",
+              fontStyle: "400",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              yAdjust: -200,
+              yPadding: 30,
+              fontColor: "#000",
+              content: "Présidentielle 2017",
+              enabled: true
+            },
+          }
+        ]
+      }
+    }
+  });
+
+  let evolCtx2 = document.getElementById('evolChart2').getContext('2d');
+
+  let evolChart2 = new Chart(evolCtx2, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: `Sous-total « S'améliorera » (en %)`,
+          data: [45, 30, 20, 2, 5, 10, 1],
+          fill: false,
+          borderColor: '#948A54',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#948A54'
+          }
+        },
+        {
+          label: `Sous-total « Se dégradera » (en %)`,
+          data: [1, 10, 5, 2, 20, 30, 45],
+          fill: false,
+          borderColor: '#9B9B9B',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#9B9B9B'
+          }
+        }
+      ]
+    },
+    // Configuration options go here
+    options: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 10,
+          fontSize: 10,
+          fontColor: '#4A4A4A'
+
+        }
+      },
+      title: {
+        fontColor: '#4A4A4A',
+        fontStyle: 400,
+        fontSize: 14,
+        display: true,
+        text: 'Évolution sur l’année'
+      },
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false,
+              maxRotation: 80,
+              minRotation: 45
+            }
+          }
+        ]
+      }
+    }
+  });
+
+
+  /***
+   * Question 3
+   */
+
+  let barCtx3 = document.getElementById('barChart3').getContext('2d');
+
+  let barChart3 = new Chart(barCtx3, {
+    type: 'bar',
+    data: {
+      labels: barLabels,
+      datasets: [{
+        data: [1, 10, 5, 2, 20, 30],
+        backgroundColor: barColors,
+        datalabels: {
+          align: 'top',
+          anchor: 'end',
+          color: barColors
+        }
+      }]
+    },
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+          {
+            drawTime: "afterDatasetsDraw",
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "February",
+            borderColor: "rgba(0, 0, 0, .3)",
+            borderWidth: 1,
+            label: {
+              fontFamily: "'Avenir Next', sans-serif",
+              fontStyle: "400",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              yAdjust: -200,
+              yPadding: 30,
+              fontColor: "#000",
+              content: "Présidentielle 2017",
+              enabled: true
+            },
+          }
+        ]
+      }
+    }
+  });
+
+  let evolCtx3 = document.getElementById('evolChart3').getContext('2d');
+
+  let evolChart3 = new Chart(evolCtx3, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: `Sous-total « S'améliorera » (en %)`,
+          data: [45, 30, 20, 2, 5, 10, 1],
+          fill: false,
+          borderColor: '#948A54',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#948A54'
+          }
+        },
+        {
+          label: `Sous-total « Se dégradera » (en %)`,
+          data: [1, 10, 5, 2, 20, 30, 45],
+          fill: false,
+          borderColor: '#9B9B9B',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#9B9B9B'
+          }
+        }
+      ]
+    },
+    // Configuration options go here
+    options: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 10,
+          fontSize: 10,
+          fontColor: '#4A4A4A'
+
+        }
+      },
+      title: {
+        fontColor: '#4A4A4A',
+        fontStyle: 400,
+        fontSize: 14,
+        display: true,
+        text: 'Évolution sur l’année'
+      },
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false,
+              maxRotation: 80,
+              minRotation: 45
+            }
+          }
+        ]
+      }
+    }
+  });
+
+
+  /***
+   * Question 4
+   */
+
+  let barCtx4 = document.getElementById('barChart4').getContext('2d');
+
+  let barChart4 = new Chart(barCtx4, {
+    type: 'bar',
+    data: {
+      labels: barLabels,
+      datasets: [{
+        data: [1, 10, 5, 2, 20, 30],
+        backgroundColor: barColors,
+        datalabels: {
+          align: 'top',
+          anchor: 'end',
+          color: barColors
+        }
+      }]
+    },
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+          {
+            drawTime: "afterDatasetsDraw",
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "February",
+            borderColor: "rgba(0, 0, 0, .3)",
+            borderWidth: 1,
+            label: {
+              fontFamily: "'Avenir Next', sans-serif",
+              fontStyle: "400",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              yAdjust: -200,
+              yPadding: 30,
+              fontColor: "#000",
+              content: "Présidentielle 2017",
+              enabled: true
+            },
+          }
+        ]
+      }
+    }
+  });
+
+  let evolCtx4 = document.getElementById('evolChart4').getContext('2d');
+
+  let evolChart4 = new Chart(evolCtx4, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: `Sous-total « S'améliorera » (en %)`,
+          data: [45, 30, 20, 2, 5, 10, 1],
+          fill: false,
+          borderColor: '#948A54',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#948A54'
+          }
+        },
+        {
+          label: `Sous-total « Se dégradera » (en %)`,
+          data: [1, 10, 5, 2, 20, 30, 45],
+          fill: false,
+          borderColor: '#9B9B9B',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#9B9B9B'
+          }
+        }
+      ]
+    },
+    // Configuration options go here
+    options: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 10,
+          fontSize: 10,
+          fontColor: '#4A4A4A'
+
+        }
+      },
+      title: {
+        fontColor: '#4A4A4A',
+        fontStyle: 400,
+        fontSize: 14,
+        display: true,
+        text: 'Évolution sur l’année'
+      },
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false,
+              maxRotation: 80,
+              minRotation: 45
+            }
+          }
+        ]
+      }
+    }
+  });
+
+  /***
+   * Question 5
+   */
+
+  let barCtx5 = document.getElementById('barChart5').getContext('2d');
+
+  let barChart5 = new Chart(barCtx5, {
+    type: 'bar',
+    data: {
+      labels: barLabels,
+      datasets: [{
+        data: [1, 10, 5, 2, 20, 30],
+        backgroundColor: barColors,
+        datalabels: {
+          align: 'top',
+          anchor: 'end',
+          color: barColors
+        }
+      }]
+    },
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+          {
+            drawTime: "afterDatasetsDraw",
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "February",
+            borderColor: "rgba(0, 0, 0, .3)",
+            borderWidth: 1,
+            label: {
+              fontFamily: "'Avenir Next', sans-serif",
+              fontStyle: "400",
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              yAdjust: -200,
+              yPadding: 30,
+              fontColor: "#000",
+              content: "Présidentielle 2017",
+              enabled: true
+            },
+          }
+        ]
+      }
+    }
+  });
+
+  let evolCtx5 = document.getElementById('evolChart5').getContext('2d');
+
+  let evolChart5 = new Chart(evolCtx5, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: `Sous-total « S'améliorera » (en %)`,
+          data: [45, 30, 20, 2, 5, 10, 1],
+          fill: false,
+          borderColor: '#948A54',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#948A54'
+          }
+        },
+        {
+          label: `Sous-total « Se dégradera » (en %)`,
+          data: [1, 10, 5, 2, 20, 30, 45],
+          fill: false,
+          borderColor: '#9B9B9B',
+          datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#9B9B9B'
+          }
+        }
+      ]
+    },
+    // Configuration options go here
+    options: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 10,
+          fontSize: 10,
+          fontColor: '#4A4A4A'
+
+        }
+      },
+      title: {
+        fontColor: '#4A4A4A',
+        fontStyle: 400,
+        fontSize: 14,
+        display: true,
+        text: 'Évolution sur l’année'
+      },
+      scales: {
+        yAxes: [
+          {
+            display: false,
+            gridLines: {
+              drawBorder: false
+            }
+          }
+        ],
+        xAxes: [
+          {
+            ticks: {
+              fontColor: 'rgba(0, 0, 0, .5)',
+              autoSkip: false,
+              maxRotation: 80,
+              minRotation: 45
+            }
+          }
+        ]
+      }
+    }
+  });
+
+
+
+
+
 });
+

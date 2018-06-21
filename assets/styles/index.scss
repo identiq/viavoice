@@ -118,7 +118,15 @@ h5 {
 }
 
 #range {
-  height: 400px;
+  height: 60vh;
+
+  .noUi-value-sub, .noUi-marker-sub {
+    color: $dark;
+  }
+
+  .noUi-marker-sub {
+    height: 1px;
+  }
 
   &.noUi-target {
     background: $light-grey;

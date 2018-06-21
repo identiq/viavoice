@@ -10,24 +10,51 @@ import 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-annotation';
 import moment from 'moment';
 
+const lists = {
+  "ages": [{"id": 1, "text": "18-29 ans"}, {"id": 2, "text": "30-39 ans"}, {
+    "id": 3,
+    "text": "40-49 ans"
+  }, {"id": 4, "text": "50 ans et plus"}],
+  "sexes": [{"id": 1, "text": "Homme"}, {"id": 2, "text": "Femme"}],
+  "secteurs": [{"id": 1, "text": "Secteur public"}, {"id": 2, "text": "Secteur privé"}]
+};
 
 $(function () {
 
+
   $('#fullpage').fullpage({
-    anchors: ['firstPage', 'secondPage', '3rdPage'],
-    sectionsColor: ['#fff', '#fff', '#fff'],
+    anchors: ['indicesyn', 'indicean', 'question1', 'question2', 'question3', 'question4', 'question5'],
+    sectionsColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
     navigation: true,
-    navigationPosition: 'right',
-    navigationTooltips: ['First', 'Second', 'Third']
+    navigationPosition: 'right'
   });
 
-  $('select').each(function () {
-    $(this).select2({
-      theme: 'bootstrap4',
-      placeholder: $(this).attr('placeholder'),
-      allowClear: Boolean($(this).data('allow_clear')),
-      width: '100%'
-    });
+
+  let ageInput = $('select[name="age[]"]');
+  ageInput.select2({
+    theme: 'bootstrap4',
+    allowClear: Boolean(ageInput.data('allow_clear')),
+    width: '100%',
+    data: lists.ages,
+    placeholder: ageInput.attr('placeholder')
+  });
+
+  let secteurInput = $('select[name="secteur[]"]');
+  secteurInput.select2({
+    theme: 'bootstrap4',
+    placeholder: secteurInput.attr('placeholder'),
+    allowClear: Boolean(secteurInput.data('allow_clear')),
+    width: '100%',
+    data: lists.secteurs
+  });
+
+  let sexeInput = $('select[name="sexe[]"]');
+  sexeInput.select2({
+    theme: 'bootstrap4',
+    placeholder: sexeInput.attr('placeholder'),
+    allowClear: Boolean(sexeInput.data('allow_clear')),
+    width: '100%',
+    data: lists.sexes
   });
 
   let slider = document.getElementById('range');
@@ -43,11 +70,9 @@ $(function () {
     step: 95 * 24 * 60 * 60 * 1000,
     format: {
       to: function (value) {
-        console.log(moment(value).format('YYYY MMMM'));
         return value;
       },
       from: function (value) {
-        console.log(moment(value).format('YYYY MMMM'));
         return value;
       }
     },
@@ -90,6 +115,22 @@ $(function () {
     `Se dégradera  un peu`,
     `Se dégradera  nettement`,
     `Non réponse`
+  ];
+
+  const bar4Labels = [
+    `Très motivés`,
+    `Assez motivés`,
+    `Pas vraiment motivés`,
+    `Pas du tout motivés`,
+    `Ne se prononce pas`
+  ];
+
+  const bar5Labels = [
+    `Très importantes`,
+    `Plutôt importantes`,
+    `Plutôt faibles`,
+    `Inexistantes`,
+    `Ne se prononce pas`
   ];
 
 
@@ -653,9 +694,9 @@ $(function () {
   let barChart4 = new Chart(barCtx4, {
     type: 'bar',
     data: {
-      labels: barLabels,
+      labels: bar4Labels,
       datasets: [{
-        data: [1, 10, 5, 2, 20, 30],
+        data: [1, 10, 5, 2, 20],
         backgroundColor: barColors,
         datalabels: {
           align: 'top',
@@ -794,9 +835,9 @@ $(function () {
   let barChart5 = new Chart(barCtx5, {
     type: 'bar',
     data: {
-      labels: barLabels,
+      labels: bar5Labels,
       datasets: [{
-        data: [1, 10, 5, 2, 20, 30],
+        data: [1, 10, 5, 2, 20],
         backgroundColor: barColors,
         datalabels: {
           align: 'top',
@@ -925,9 +966,6 @@ $(function () {
       }
     }
   });
-
-
-
 
 
 });

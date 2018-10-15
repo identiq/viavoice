@@ -11,7 +11,7 @@ import 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-annotation';
 import moment from 'moment';
 
-const API_URL = "http://127.0.0.1:3000";
+const API_URL = "https://viavoice-api.identiq.net";
 const lists = {
   "ages": [{"id": 1, "text": "18-29 ans"}, {"id": 2, "text": "30-39 ans"}, {
     "id": 3,
